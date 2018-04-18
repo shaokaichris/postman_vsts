@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "e50ea052-ad4e-44c6-9c8d-6ffbeccaac0f",
+		"name": "Warranty",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetWarranty",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ef427ab6-e8f1-4e0e-9977-8968a44d76c5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "cbe2a373-2d1b-4a35-ad2d-4d58fce375c7",
+						"type": "text/javascript",
+						"exec": [
+							"var warrantyContract = ",
+							"{",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"warranties\": {",
+							"      \"type\": \"array\",",
+							"      \"items\": [",
+							"            {",
+							"              \"type\": \"object\",",
+							"              \"properties\": {",
+							"                \"serialNumber\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"warrantyType\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"description\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"division\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"manufacturerCode\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"yearOfManufacture\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"model\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"startDate\": {",
+							"                  \"type\": \"string\"",
+							"                },",
+							"                \"endDate\": {",
+							"                  \"type\": \"string\"",
+							"                }",
+							"              },",
+							"              \"required\": [",
+							"                \"serialNumber\",",
+							"                \"warrantyType\",",
+							"                \"description\",",
+							"                \"division\",",
+							"                \"manufacturerCode\",",
+							"                \"yearOfManufacture\",",
+							"                \"model\",",
+							"                \"startDate\",",
+							"                \"endDate\"",
+							"              ]",
+							"            }",
+							"        ]",
+							"    }",
+							"  }",
+							"};",
+							"",
+							"var responseWarranty = JSON.parse(responseBody);",
+							"tests[\"Warranties are valid\"] = tv4.validate(responseWarranty, warrantyContract);",
+							"",
+							"console.log(\"response : \", responseWarranty);",
+							"console.log(\"contract : \", warrantyContract);",
+							"console.log(\"Validation errors : \", tv4.error);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{warantyContract}}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/machineAssets/{{customerID}}/{{serialNumber}}/warranty",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"machineAssets",
+						"{{customerID}}",
+						"{{serialNumber}}",
+						"warranty"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
